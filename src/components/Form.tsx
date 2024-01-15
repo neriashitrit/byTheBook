@@ -1,10 +1,13 @@
 // src/components/Form.tsx
 import React, { useState } from 'react';
+import ApiService from '../services/api.service.tsx';
+import { API_ENDPOINTS } from '../constants/db.constants.tsx';
 import {InputField, BooleanInputField} from './InputField.tsx';
 import { FullPageContainer, FormContainer } from './StyledComponents.tsx'; // Import the styled component
 
 
 const Form: React.FC = () => {
+  const [formRespond, setFormRespond] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [idNumber, setIdNumber] = useState('');
@@ -33,11 +36,7 @@ const Form: React.FC = () => {
   };
 
   const handleSubmit = async () => {
-    console.log('@@@@4 in submit');
-    
-
     if (validateForm()) {
-        console.log('@@@@5 in submit');
         console.log('form data' ,
         firstName,
         lastName,
@@ -52,19 +51,22 @@ const Form: React.FC = () => {
     );
 
         
-      // Send data to the server (You can use a fetch or Axios here)
-    //   try {
-    //     const response = await fetch('/api/submit', {
-    //       method: 'POST',
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //       },
-    //       body: JSON.stringify({ name, email, phone }),
-    //     });
-        // Handle the response from the server
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
+      try {
+        const response = await ApiService.getInstance().post(API_ENDPOINTS.USERS.CREATE_USER, {firstName,
+          lastName,
+          idNumber,
+          address,
+          email,
+          phoneSms,
+          phoneWhatsApp,
+          goodOpinion,
+          badOpinion,
+          getMessages})
+          setFormRespond('הטופס נשלח בהצלחה')
+      } catch (error) {
+        console.error(error);
+        setFormRespond('אירעה שגיאה בעת שליחת הטופס. נא ליצור קשר עם שדה הראיה')
+      }
     }
   };
 
@@ -86,6 +88,7 @@ const Form: React.FC = () => {
           <InputField label="נשמח לשמוע במה לדעתך אנחנו צריכים להשתפר" type="textarea" value={badOpinion} onChange={setBadOpinion}/>
           <BooleanInputField label="מאשר/ת בזאת קבלת דברי פרסום ודיוור ישיר" type="checkbox" value={getMessages} onChange={setGetMessages} error={errors.getMessages} />
           <button type="button" onClick={handleSubmit}>שלח</button>
+          {formRespond ? <h3>{formRespond}</h3> : <></>}
         </form>
       </FormContainer>
     </FullPageContainer>

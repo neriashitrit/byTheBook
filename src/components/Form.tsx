@@ -15,6 +15,7 @@ const Form: React.FC = () => {
   const [email, setEmail] = useState('');
   const [phoneSms, setPhoneSms] = useState('');
   const [phoneWhatsApp, setPhoneWhatsApp] = useState('');
+  const [haveOpinion, setHaveOpinion] = useState(false);
   const [goodOpinion, setGoodOpinion] = useState('');
   const [badOpinion, setBadOpinion] = useState('');
   const [getMessages, setGetMessages] = useState(false);
@@ -37,20 +38,6 @@ const Form: React.FC = () => {
 
   const handleSubmit = async () => {
     if (validateForm()) {
-        console.log('form data' ,
-        firstName,
-        lastName,
-        idNumber,
-        address,
-        email,
-        phoneSms,
-        phoneWhatsApp,
-        goodOpinion,
-        badOpinion,
-        getMessages,
-    );
-
-        
       try {
         const response = await ApiService.getInstance().post(API_ENDPOINTS.USERS.CREATE_USER, {firstName,
           lastName,
@@ -67,6 +54,8 @@ const Form: React.FC = () => {
         console.error(error);
         setFormRespond('אירעה שגיאה בעת שליחת הטופס. נא ליצור קשר עם שדה הראיה')
       }
+    } else {
+      console.log('validate form failed')
     }
   };
 
@@ -83,9 +72,11 @@ const Form: React.FC = () => {
           <InputField label="כתובת מייל" type="email" value={email} onChange={setEmail} error={errors.email} />
           <InputField label="sms פלאפון שמקבל הודעות " type="text" value={phoneSms} onChange={setPhoneSms} error={errors.phoneSms} />
           <InputField label="whatsapp פלאפון שמקבל הודעות " type="text" value={phoneWhatsApp} onChange={setPhoneWhatsApp} error={errors.phoneWhatsApp} />
-          <h3>במידה ורכשת אצלנו מוצר בעבר</h3>
-          <InputField label="נשמח לשמוע את חוות דעתך החיובית על שדה הראיה " type="textarea" value={goodOpinion} onChange={setGoodOpinion} />
-          <InputField label="נשמח לשמוע במה לדעתך אנחנו צריכים להשתפר" type="textarea" value={badOpinion} onChange={setBadOpinion}/>
+          <BooleanInputField label="רכשתי בעבר מוצר בחנות" type="checkbox" value={haveOpinion} onChange={setHaveOpinion} />
+          {haveOpinion ? <> 
+            <InputField label="נשמח לשמוע את חוות דעתך החיובית על שדה הראיה " type="textarea" value={goodOpinion} onChange={setGoodOpinion} />
+            <InputField label="נשמח לשמוע במה לדעתך אנחנו צריכים להשתפר" type="textarea" value={badOpinion} onChange={setBadOpinion}/> </> 
+            : <></>}          
           <BooleanInputField label="מאשר/ת בזאת קבלת דברי פרסום ודיוור ישיר" type="checkbox" value={getMessages} onChange={setGetMessages} error={errors.getMessages} />
           <button type="button" onClick={handleSubmit}>שלח</button>
           {formRespond ? <h3>{formRespond}</h3> : <></>}

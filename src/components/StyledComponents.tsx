@@ -6,7 +6,7 @@ export const FullPageContainer = styled.div`
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url('/background-image.webp') center center no-repeat;
+    background: url('/background-image.jpg') center center no-repeat;
     background-size: cover; /* Cover the entire container with the image */
     background-color: #f0f0f0; /* Fallback background color */
 `;  

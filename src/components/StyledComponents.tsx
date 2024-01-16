@@ -21,7 +21,7 @@ export const FormContainer = styled.div`
   display: grid;
   justify-items: center;
   justify-content: space-around;
-
+  direction: rtl;
 
   form {
     display: inline-flex;
@@ -45,6 +45,7 @@ export const FormContainer = styled.div`
     margin: 5px 0;
     border: 1px solid #ddd;
     border-radius: 3px;
+    direction: rtl important;
   }
 
   .error {
@@ -67,7 +68,25 @@ export const FormContainer = styled.div`
   }
 `;
 
+export const LabelWithMandatory = styled.div`
+p {
+  color: #f40404;
+  font-size: xx-large;
+  font-weight: bold;
+  display: inline;
+  margin-bottom: 8px;
+  justify-content: center;
 
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 8px;
+  margin-right: 8px;
+  font-size: larger;
+  display: inline;
+}
+`
  export const BooleanInput = styled.div`
  background-color: #edfeb1;
  border-radius: 5px;
@@ -78,13 +97,15 @@ export const FormContainer = styled.div`
  display: flex;
  flex-wrap: wrap;
  justify-items: center;
- justify-content: space-evenly;
+ justify-content: center;
  align-items: baseline;
 
  label {
   font-weight: bold;
   margin-bottom: 8px;
   font-size: larger;
+  margin-left: 8px;
+
 }
 
 input {
@@ -95,11 +116,9 @@ input {
   border-radius: 3px;
   width: 17px;
   height: 17px;
-
 }
 
 .error {
-  
   color: #e74c3c; /* Red color for errors */
   font-size: medium;
 }

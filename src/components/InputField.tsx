@@ -40,8 +40,8 @@ export const BooleanInputField: React.FC<BooleanInputFieldProps> = ({ label, typ
       <LabelWithMandatory>
         {mandatory? <p>*</p> : <></>}
         <input type={type} checked={value} onChange={(e) => onChange(e.target.checked)} />
-        {error && <div className="error">{error}</div>}
         <label>{label}</label>
+        {error && <div className="error">{error}</div>}
       </LabelWithMandatory>
     </BooleanInput>
   );

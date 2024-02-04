@@ -85,7 +85,8 @@ const Form: React.FC = () => {
   return (
     <FullPageContainer>
       <FormContainer>
-        <h2>לקבלת מבצעים, עדכונים  ומידע על בריאות העיניים הצטרפו למועדון הלקוחות שלנו </h2>
+        <h2>לקבלת מבצעים, עדכונים  ומידע על בריאות העיניים </h2>
+        <h2>הצטרפו למועדון הלקוחות שלנו </h2>
         <form>
           <InputField label="שם פרטי" type="text" value={firstName} onChange={setFirstName} error={errors.firstName} mandatory={true} />
           <InputField label="שם משפחה" type="text" value={lastName} onChange={setLastName} error={errors.lastName} mandatory={true}/>
@@ -100,8 +101,8 @@ const Form: React.FC = () => {
             <InputField label="אנחנו תמיד רוצים להשתפר, יש לך רעיון?" type="textarea" value={badOpinion} onChange={setBadOpinion}/> </> 
             : <></>}          
           <BooleanInputField label="מאשר/ת בזאת קבלת דברי פרסום ודיוור ישיר" type="checkbox" value={getMessages} onChange={setGetMessages} error={errors.getMessages} mandatory={true}/>
-          <h3>מבטיחים לא להעביר את הפרטים שלכם, זה נשאר בנינו</h3>
-          <h3>ומבטיחים לא להציק {String.fromCodePoint(0x1F609)}</h3>
+          <h3 >מבטיחים לא להעביר את הפרטים שלכם, זה נשאר בנינו</h3>
+          <h3 >ומבטיחים לא להציק {String.fromCodePoint(0x1F609)}</h3>
           <button type="button" onClick={handleSubmit} disabled={isLoading}>שלח</button>
           {formRespond ? <h3>{formRespond}</h3> : <></>}
         </form>

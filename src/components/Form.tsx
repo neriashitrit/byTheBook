@@ -58,24 +58,36 @@ const Form: React.FC = () => {
     setIsLoading(true)
     if (validateForm()) {
       try {
-        const response = await ApiService.getInstance().post(API_ENDPOINTS.USERS.CREATE_USER, {firstName,
-          lastName,
-          idNumber,
-          address,
-          email,
-          phoneSms,
-          phoneWhatsApp,
-          goodOpinion,
-          badOpinion,
-          getMessages})
+        const response = await ApiService.getInstance().post(API_ENDPOINTS.USERS.CREATE_USER, {
+            firstName,
+            lastName,
+            idNumber,
+            address,
+            email,
+            phoneSms,
+            phoneWhatsApp,
+            goodOpinion,
+            badOpinion,
+            getMessages
+        })
         setFormRespond('הטופס נשלח בהצלחה')
         emptyForm()
-      } catch (error) {
+    } catch (error) {
+        ApiService.getInstance().post(API_ENDPOINTS.LOGS.LOG_ERROR, {
+            error,
+            firstName,
+            lastName,
+            idNumber,
+            email,
+            phoneSms,
+            phoneWhatsApp
+        })
         console.error(error);
         setFormRespond('אירעה שגיאה בעת שליחת הטופס. נא ליצור קשר עם שדה הראיה')
-      } finally{
+    } finally {
         setIsLoading(false)
-      }
+    }
+    
     } else {
       console.log('validate form failed')
     setIsLoading(false)

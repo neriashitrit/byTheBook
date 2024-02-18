@@ -83,7 +83,7 @@ const Form: React.FC = () => {
             phoneWhatsApp
         })
         console.error(error);
-        setFormRespond(`אירעה שגיאה בעת שליחת הטופס. נא ליצור קשר עם שדה הראיה ${error}`)
+        setFormRespond(`אירעה שגיאה בעת שליחת הטופס. נא ליצור קשר עם שדה הראיה ${JSON.stringify(error)} ${error}`)
     } finally {
         setIsLoading(false)
     }

@@ -70,7 +70,7 @@ const Form: React.FC = () => {
             badOpinion,
             getMessages
         })
-        setFormRespond('הטופס נשלח בהצלחה')
+        setFormRespond('ברוך הבא!!! עכשיו אתה חלק מהמועדון')
         emptyForm()
     } catch (error) {
         ApiService.getInstance().post(API_ENDPOINTS.LOGS.LOG_ERROR, {
@@ -83,7 +83,6 @@ const Form: React.FC = () => {
             phoneWhatsApp
         })
         console.error(error);
-        setFormRespond(`אירעה שגיאה בעת שליחת הטופס. נא ליצור קשר עם שדה הראיה ${JSON.stringify(error)} ${error}`)
     } finally {
         setIsLoading(false)
     }

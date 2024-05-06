@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import ApiService from '../services/api.service.tsx';
 import { API_ENDPOINTS } from '../constants/db.constants.tsx';
 import {InputField, BooleanInputField} from './InputField.tsx';
+import CircularIndeterminate from './Loading.tsx';
 import { FullPageContainer, FormContainer } from './StyledComponents.tsx'; // Import the styled component
 
 
@@ -46,7 +47,7 @@ const Form: React.FC = () => {
     if (!idNumber) newErrors.idNumber = 'מספר תעודת זהות הוא שדה חובה';
     if (!phoneSms && !phoneWhatsApp) {newErrors.phoneSms = 'יש להכניס טלפון אחד לפחות'; newErrors.phoneWhatsApp = 'יש להכניס טלפון אחד לפחות'}
     
-    if (idNumber.length != 9 && idNumber) newErrors.idNumber = 'מספר תעודת זהות צריך להכיל תשעה ספרות';
+    if (idNumber.length !== 9 && idNumber) newErrors.idNumber = 'מספר תעודת זהות צריך להכיל תשעה ספרות';
     if (!validateEmail(email) && email) newErrors.email = 'כתובת מייל אינה תקינה';
     if (!validatePhone(phoneSms) && phoneSms) newErrors.phoneSms = 'מספר הטלפון אינו תקין';
     if (!validatePhone(phoneWhatsApp) && phoneWhatsApp) newErrors.phoneWhatsApp = 'מספר הטלפון אינו תקין';
@@ -82,6 +83,7 @@ const Form: React.FC = () => {
             phoneSms,
             phoneWhatsApp
         })
+        if (error.data.errorCode === 4011) setFormRespond('המשתמש כבר קיים במערכת')
         console.error(error);
     } finally {
         setIsLoading(false)
@@ -96,6 +98,9 @@ const Form: React.FC = () => {
   return (
     <FullPageContainer>
       <FormContainer>
+      {isLoading ? 
+      <CircularIndeterminate></CircularIndeterminate>
+      : <>
         <h2>לקבלת מבצעים, עדכונים  ומידע על בריאות העיניים </h2>
         <h2>הצטרפו למועדון הלקוחות שלנו </h2>
         <form>
@@ -116,7 +121,9 @@ const Form: React.FC = () => {
           <h3 >ומבטיחים לא להציק {String.fromCodePoint(0x1F609)}</h3>
           <button type="button" onClick={handleSubmit} disabled={isLoading}>שלח</button>
           {formRespond ? <h3>{formRespond}</h3> : <></>}
-        </form>
+          </form>
+          </>
+    }
       </FormContainer>
     </FullPageContainer>
   );

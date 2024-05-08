@@ -83,7 +83,7 @@ const Form: React.FC = () => {
             phoneSms,
             phoneWhatsApp
         })
-        if (error.data.errorCode === 4011) setFormRespond('המשתמש כבר קיים במערכת')
+        if (error.data?.errorCode === 4011) setFormRespond('המשתמש כבר קיים במערכת')
         console.error(error);
     } finally {
         setIsLoading(false)

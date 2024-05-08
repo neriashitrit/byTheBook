@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Form />} />
         <Route path="/byTheBook" element={<Form />} />
-        <Route path="/backOffice" element={<BackOffice />} />
+        <Route path="/byTheBook/backOffice" element={<BackOffice />} />
       </Routes>
     </Router>
   );

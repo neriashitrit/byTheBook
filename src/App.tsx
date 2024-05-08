@@ -1,6 +1,6 @@
 // src/App.tsx
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import BackOffice from './components/BackOffice.tsx';
 
 import Form from './components/Form.tsx';
@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Form />} />
         <Route path="/byTheBook" element={<Form />} />
-        <Route path="/byTheBook/backOffice" element={<BackOffice />} />
+        <Route path="/backOffice" element={<BackOffice />} />
       </Routes>
     </Router>
   );

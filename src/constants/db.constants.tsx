@@ -8,7 +8,7 @@ export const GET_CONFIG = {
 };
 
 // Server Base Url
-export const SERVER_BASE_URL = 'https://sore-rose-betta-wrap.cyclic.app';
+export const SERVER_BASE_URL = ' https://sde-h.azurewebsites.net';
 
 // Local Base  Url
 // export const SERVER_BASE_URL = 'http://localhost:5000';
